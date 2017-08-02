@@ -1,6 +1,6 @@
 {
   "name": "abstract-ledger",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,13 @@
     "postcoverage": "codecov",
     "precommit": "npm test",
     "prepush": "npm test",
-    "commitmsg": "validate-commit-msg"
+    "commitmsg": "validate-commit-msg",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [],
   "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com)",
   "license": "Apache-2.0",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "codecov": "^2.2.0",
     "commitizen": "^2.9.6",
@@ -27,6 +26,11 @@
     "lucass": "^3.0.0",
     "standard": "^10.0.2",
     "tap": "^10.7.0",
-    "validate-commit-msg": "^2.14.0"
+    "validate-commit-msg": "^2.14.0",
+    "semantic-release": "^6.3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikeal/abstract-ledger.git"
   }
 }
