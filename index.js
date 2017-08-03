@@ -38,7 +38,7 @@ class AbstractLedger {
   async timestamp () {
     return Date.now()
   }
-  async validate (lastBlock, msg) {
+  async validate (oldhash, msg) {
     // Must throw if invalid.
     if (msg) return true
     throw new Error('validation error.')
