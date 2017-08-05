@@ -26,9 +26,12 @@ test('errors: set Root without matching root', async t => {
   }
 })
 
-test('errors: root does not match', async t => {
+test('errors: validation error', async t => {
   t.plan(2)
   let ledger = createLedger()
+  ledger.addValidation(async msg => {
+    if (!msg) throw new Error('validation error.')
+  })
   try {
     await ledger.append(null, null)
   } catch (e) {

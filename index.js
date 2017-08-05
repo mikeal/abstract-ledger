@@ -2,13 +2,12 @@ const crypto = require('crypto')
 
 const nonce = () => crypto.randomBytes(32).toString('hex')
 
-const required = ['setRoot', 'getRoot', 'timestamp', 'validate']
+const required = ['setRoot', 'getRoot', 'timestamp']
 
 class AbstractLedger {
   constructor (store) {
     this.store = store
-    this._root = null
-    this._ledger = []
+    this._validations = []
     for (let method of required) {
       if (!this[method]) throw new Error(`Class must implement ${method}.`)
     }
@@ -22,15 +21,25 @@ class AbstractLedger {
     await this.setRoot(root, hash, block.time)
     return hash
   }
+  addValidation (fn) {
+    this._validations.push(fn)
+  }
+  async validate (msg) {
+    await Promise.all(this._validations.map(v => v(msg)))
+    return true
+  }
 }
 
 class InMemoryLedger extends AbstractLedger {
+  constructor (store) {
+    super(store)
+    this._root = null
+  }
   async getRoot () {
     return this._root
   }
   async setRoot (old, hash, time) {
     if (this._root === old) {
-      this._ledger.push([time, hash])
       this._root = hash
     } else {
       throw new Error('old hash must match current hash.')
@@ -38,11 +47,6 @@ class InMemoryLedger extends AbstractLedger {
   }
   async timestamp () {
     return Date.now()
-  }
-  async validate (msg) {
-    // Must throw if invalid.
-    if (msg) return true
-    throw new Error('validation error.')
   }
 }
 
