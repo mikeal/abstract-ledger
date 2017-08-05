@@ -36,3 +36,18 @@ test('errors: root does not match', async t => {
     t.type(e, 'Error')
   }
 })
+
+test('errors: method not implemented', async t => {
+  t.plan(3)
+  class Test extends abstractLedger.AbstractLedger {
+
+  }
+  let x
+  try {
+    x = new Test()
+  } catch (e) {
+    t.type(e, 'Error')
+    t.ok(e.message.startsWith('Class must implement'))
+  }
+  t.ok(!x)
+})

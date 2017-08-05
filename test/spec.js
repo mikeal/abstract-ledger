@@ -6,7 +6,7 @@ module.exports = (name, createLedger) => {
     let ledger = createLedger()
     let root = await ledger.append({text: 'test'}, null)
     t.same(root, ledger._root)
-    let buff = await ledger._get(root)
+    let buff = await ledger.store.get(root)
     let block = JSON.parse(buff.toString())
     t.same(block.root, null)
     t.same(block.msg, { text: 'test' })

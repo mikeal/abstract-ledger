@@ -17,17 +17,22 @@
   "keywords": [],
   "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com)",
   "license": "Apache-2.0",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "codecov": "^2.2.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.3",
-    "lucass": "^3.0.0",
+    "lucass": "^4.0.0",
+    "semantic-release": "^6.3.6",
     "standard": "^10.0.2",
     "tap": "^10.7.0",
-    "validate-commit-msg": "^2.14.0",
-    "semantic-release": "^6.3.6"
+    "validate-commit-msg": "^2.14.0"
   },
   "repository": {
     "type": "git",
