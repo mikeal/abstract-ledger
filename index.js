@@ -18,7 +18,7 @@ class AbstractLedger {
     await this.validate(msg)
     let block = {msg, root, nonce: nonce(), time: await this.timestamp()}
     let hash = await this.store.set(Buffer.from(JSON.stringify(block)))
-    await this.setRoot(root, hash, block.time)
+    await this.setRoot(root, hash)
     return hash
   }
   addValidation (fn) {
@@ -38,7 +38,7 @@ class InMemoryLedger extends AbstractLedger {
   async getRoot () {
     return this._root
   }
-  async setRoot (old, hash, time) {
+  async setRoot (old, hash) {
     if (this._root === old) {
       this._root = hash
     } else {
